@@ -3,38 +3,27 @@ package alatoo.kg.eventregistration.controllers;
 import alatoo.kg.eventregistration.entities.Event;
 import alatoo.kg.eventregistration.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/events")
+@RequestMapping("/api/events")
 public class EventController {
+
     @Autowired
     private EventService eventService;
 
-    @GetMapping
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
-    }
-
-    @GetMapping("/{id}")
-    public Event getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
-    }
-
     @PostMapping
-    public Event createEvent(@RequestBody Event event) {
-        return eventService.createEvent(event);
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        Event createdEvent = eventService.createEvent(event);
+        return ResponseEntity.ok(createdEvent);
     }
 
-    @PutMapping("/{id}")
-    public Event updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
-        return eventService.updateEvent(id, updatedEvent);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
+    @GetMapping
+    public ResponseEntity<List<Event>> getAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        return ResponseEntity.ok(events);
     }
 }
