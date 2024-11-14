@@ -14,10 +14,6 @@ public class ParticipantController {
     @Autowired
     private ParticipantService participantService;
 
-    public ParticipantController(ParticipantService participantService) {
-        this.participantService = participantService;
-    }
-
     @PostMapping("/register")
     public ResponseEntity<Participant> registerParticipant(
             @RequestBody ParticipantRegistrationDTO registrationDTO) {

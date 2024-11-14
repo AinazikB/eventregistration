@@ -20,9 +20,8 @@ public class Participant {
 
     private String email;
 
-    @Column(name = "confirmation_status", nullable = false)
-    private Boolean confirmationStatus = false; // Default to false (not confirmed)
-
+    @Column(name = "confirmed", nullable = false)
+    private Boolean confirmationStatus = false;
 
     private String confirmationToken;
 
